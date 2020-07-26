@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * The user has the task to guess the right order of the shown sequence.
+ * This class provides the creation of the UI and the logic for this task.
+ */
 public class Sequence extends AppCompatActivity {
 
     protected ArrayList<String> testListe; //hauptliste, gearbeitet wird aber nur mit copies

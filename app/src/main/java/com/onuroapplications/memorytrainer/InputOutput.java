@@ -10,6 +10,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * This class provides the option to save and read back data to and from the phone storage.
+ */
 public class InputOutput {
 
     public static final String INPUT_LIST = "savedArrayList";
