@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/n-back"
+        android:title="n-back" />
+    <item
+        android:id="@+id/sequence"
+        android:title="guess sequence" />
+    <item
+        android:id="@+id/sequenceBackwards"
+        android:title="reverse sequence" />
+    <item
+        android:id="@+id/runningMemory"
+        android:title="running memory span" />
+</menu>

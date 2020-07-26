@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nback1"
+            android:checked="true"
+            android:enabled="true"
+            android:title="n = 1" />
+        <item
+            android:id="@+id/nback2"
+            android:enabled="true"
+            android:title="n = 2" />
+        <item
+            android:id="@+id/nback3"
+            android:enabled="true"
+            android:title="n = 3" />
+        <item
+            android:id="@+id/nback4"
+            android:enabled="true"
+            android:title="n = 4" />
+        <item
+            android:id="@+id/nback5"
+            android:enabled="true"
+            android:title="n = 5" />
+    </group>
+</menu>
