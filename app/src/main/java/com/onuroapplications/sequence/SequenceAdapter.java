@@ -18,7 +18,7 @@ public class SequenceAdapter extends ArrayAdapter<String> {
     private ArrayList<String> arrList;
     private final LayoutInflater inflater;
     private final int resource;
-    
+
     private final String TAG = "SequenceAdapter";
 
     public SequenceAdapter(Context context, int resource, ArrayList<String> dataArrayList) {
