@@ -71,7 +71,7 @@ public class RunningMemory extends Sequence {
             Random random1 = new Random();
             int randomInt = random1.nextInt(copiedListe1.size());
             String randomElem = copiedListe1.get(randomInt);
-            text.setText(randomElem);
+            setTextAndAnim(randomElem, text, alternateAnimation);
             sequenceOrderStore.add(randomElem);
             copiedListe1.remove(randomElem); //dieses Elem löschen damit jedes nur einmal kommt
 

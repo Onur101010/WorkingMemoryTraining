@@ -28,7 +28,7 @@ public class SequenceBackwards extends Sequence {
         if(copiedListe1.size() > 0) {
             int randomInt = ThreadLocalRandom.current().nextInt(0, copiedListe1.size());
             String randomElem = copiedListe1.get(randomInt);
-            text.setText(randomElem);
+            setTextAndAnim(randomElem, text, alternateAnimation);
             sequenceOrderStore.add(randomElem);
             copiedListe1.remove(randomElem); //dieses Elem löschen damit jedes nur einmal kommt
         } else {

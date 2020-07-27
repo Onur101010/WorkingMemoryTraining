@@ -182,13 +182,13 @@ public class Sequence extends AppCompatActivity {
         }
     }
 
-    private void setTextAndAnim(String text, TextView v, Animation anim){
+    protected void setTextAndAnim(String text, TextView v, Animation anim){
         v.setText(text);
         v.startAnimation(anim);
     }
 
     //sets right and left animation alternately and text to the TextView
-    private void setTextAndAnim(String text, TextView v, Boolean chooseSlideRight) {
+    protected void setTextAndAnim(String text, TextView v, Boolean chooseSlideRight) {
         v.setText(text);
         if(chooseSlideRight) {
             v.startAnimation(slideRight);
