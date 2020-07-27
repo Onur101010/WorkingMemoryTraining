@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,14 +54,27 @@ public class Sequence extends AppCompatActivity {
     //handler for delayed operations
     protected final Handler handler = new Handler();
 
+    //animations
+    protected Animation slideLeft;
+    protected Animation slideRight;
+
+    protected Boolean alternateAnimation = true; //for alternating right and left animations
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //set different transition for activity change
+        //inside your activity (if you did not enable transitions in your theme)
+        //this needs to be done before setting content
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        // set exit transition to null disables flash in transition
+        //(do same with other activity with enter transition)
+        getWindow().setExitTransition(null);
+
         setContentView(R.layout.activity_sequence);
 
         setSupportActionBarTitle(title);
-//        getSupportActionBar().setTitle("sequence");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initViews();
@@ -84,6 +100,9 @@ public class Sequence extends AppCompatActivity {
         counterText = findViewById(R.id.iterationCounter);
         text = findViewById(R.id.textView);
         restartBtn = findViewById(R.id.restart);
+
+        slideLeft = AnimationUtils.loadAnimation(Sequence.this, R.anim.slide_left);
+        slideRight = AnimationUtils.loadAnimation(Sequence.this, R.anim.slide_right);
 
         restartBtn.setVisibility(View.INVISIBLE);
         text.setVisibility(View.VISIBLE);
@@ -148,7 +167,9 @@ public class Sequence extends AppCompatActivity {
         if(copiedListe1.size() > 0) {
             int randomInt = ThreadLocalRandom.current().nextInt(0, copiedListe1.size());
             String randomElem = copiedListe1.get(randomInt);
-            text.setText(randomElem);
+            //TODO create method for setting text and do anim simultaneously
+            //setTextAndAnim(randomElem, text, slideLeft);
+            setTextAndAnim(randomElem, text, alternateAnimation);
             sequenceOrderStore.add(randomElem);
             copiedListe1.remove(randomElem); //dieses Elem löschen damit jedes nur einmal kommt
         } else {
@@ -158,6 +179,23 @@ public class Sequence extends AppCompatActivity {
             counterText.setVisibility(View.VISIBLE);
 
             initShuffledList();
+        }
+    }
+
+    private void setTextAndAnim(String text, TextView v, Animation anim){
+        v.setText(text);
+        v.startAnimation(anim);
+    }
+
+    //sets right and left animation alternately and text to the TextView
+    private void setTextAndAnim(String text, TextView v, Boolean chooseSlideRight) {
+        v.setText(text);
+        if(chooseSlideRight) {
+            v.startAnimation(slideRight);
+            alternateAnimation = false;
+        } else {
+            v.startAnimation(slideLeft);
+            alternateAnimation = true;
         }
     }
 
