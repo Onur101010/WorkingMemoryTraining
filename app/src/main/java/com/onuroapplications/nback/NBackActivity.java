@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -31,6 +33,10 @@ public class NBackActivity extends AppCompatActivity {
     private Button posBtn;
     private int posBtnClickCounter;
     private ArrayList<StringInt> speicher = new ArrayList<StringInt>();
+
+    protected Animation fadeIn;
+    protected Animation slideRight;
+    protected Boolean alternateAnimation = true; //for alternating right and left animations
 
     private int n = 1;
     private static final String TAG = "NBackActivity";
@@ -58,7 +64,7 @@ public class NBackActivity extends AppCompatActivity {
         elemBtn = findViewById(R.id.elementBtn);
         elemBtnClickCounter = 0;
 
-
+        fadeIn = AnimationUtils.loadAnimation(NBackActivity.this, R.anim.fade_in);
         testListe = (ArrayList<String>) getIntent().getSerializableExtra("dataset");
 
 
@@ -100,7 +106,9 @@ public class NBackActivity extends AppCompatActivity {
                 TextView randomIndexTV = getViewAt(randomIntPos);
                 int randomIntElem = random.nextInt(testListe.size()); //zufällige Zahl von 0-length
                 Log.i(TAG, "es wird Element  " + testListe.get(randomIntElem) + " hereingesetzt");
-                randomIndexTV.setText(testListe.get(randomIntElem));
+                //randomIndexTV.setText(testListe.get(randomIntElem));
+                setTextAndAnim(testListe.get(randomIntElem), randomIndexTV, fadeIn);
+
 
                 //lade Position und Inhalt in Speicher (als Tupel)
                 speicher.add(new StringInt(testListe.get(randomIntElem), randomIntPos));
@@ -120,6 +128,12 @@ public class NBackActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //TODO see sequence class
+    protected void setTextAndAnim(String text, TextView v, Animation anim){
+        v.setText(text);
+        v.startAnimation(anim);
     }
 
 

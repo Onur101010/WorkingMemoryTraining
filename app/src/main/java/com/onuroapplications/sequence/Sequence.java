@@ -55,6 +55,7 @@ public class Sequence extends AppCompatActivity {
     protected final Handler handler = new Handler();
 
     //animations
+    //TODO provide animations and methods on them in seperate class
     protected Animation slideLeft;
     protected Animation slideRight;
 
