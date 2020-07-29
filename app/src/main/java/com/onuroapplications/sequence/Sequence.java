@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.onuroapplications.animation.AnimationManager;
 import com.onuroapplications.memorytrainer.R;
 
 import java.util.ArrayList;
@@ -55,9 +56,7 @@ public class Sequence extends AppCompatActivity {
     protected final Handler handler = new Handler();
 
     //animations
-    protected Animation slideLeft;
-    protected Animation slideRight;
-
+    AnimationManager animationManager = AnimationManager.getInstance();
     protected Boolean alternateAnimation = true; //for alternating right and left animations
 
     @Override
@@ -101,8 +100,8 @@ public class Sequence extends AppCompatActivity {
         text = findViewById(R.id.textView);
         restartBtn = findViewById(R.id.restart);
 
-        slideLeft = AnimationUtils.loadAnimation(Sequence.this, R.anim.slide_left);
-        slideRight = AnimationUtils.loadAnimation(Sequence.this, R.anim.slide_right);
+        animationManager.addAnimation(R.anim.slide_left, "slide_left", Sequence.this);
+        animationManager.addAnimation(R.anim.slide_right, "slide_right", Sequence.this);
 
         restartBtn.setVisibility(View.INVISIBLE);
         text.setVisibility(View.VISIBLE);
@@ -167,8 +166,6 @@ public class Sequence extends AppCompatActivity {
         if(copiedListe1.size() > 0) {
             int randomInt = ThreadLocalRandom.current().nextInt(0, copiedListe1.size());
             String randomElem = copiedListe1.get(randomInt);
-            //TODO create method for setting text and do anim simultaneously
-            //setTextAndAnim(randomElem, text, slideLeft);
             setTextAndAnim(randomElem, text, alternateAnimation);
             sequenceOrderStore.add(randomElem);
             copiedListe1.remove(randomElem); //dieses Elem löschen damit jedes nur einmal kommt
@@ -182,19 +179,20 @@ public class Sequence extends AppCompatActivity {
         }
     }
 
-    protected void setTextAndAnim(String text, TextView v, Animation anim){
+    //TODO add exception if no animation could be found
+    protected void setTextAndAnim(String text, TextView v, String animationName){
         v.setText(text);
-        v.startAnimation(anim);
+        animationManager.executeStoredAnimation(animationName, v);
     }
 
     //sets right and left animation alternately and text to the TextView
     protected void setTextAndAnim(String text, TextView v, Boolean chooseSlideRight) {
         v.setText(text);
         if(chooseSlideRight) {
-            v.startAnimation(slideRight);
+            animationManager.executeStoredAnimation("slide_right", v);
             alternateAnimation = false;
         } else {
-            v.startAnimation(slideLeft);
+            animationManager.executeStoredAnimation("slide_left", v);
             alternateAnimation = true;
         }
     }
