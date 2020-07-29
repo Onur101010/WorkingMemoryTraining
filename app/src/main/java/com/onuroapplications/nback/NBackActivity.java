@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.onuroapplications.animation.AnimationManager;
 import com.onuroapplications.memorytrainer.R;
 
 import java.util.ArrayList;
@@ -33,10 +34,8 @@ public class NBackActivity extends AppCompatActivity {
     private Button posBtn;
     private int posBtnClickCounter;
     private ArrayList<StringInt> speicher = new ArrayList<StringInt>();
+    private AnimationManager animationManager = AnimationManager.getInstance();;
 
-    protected Animation fadeIn;
-    protected Animation slideRight;
-    protected Boolean alternateAnimation = true; //for alternating right and left animations
 
     private int n = 1;
     private static final String TAG = "NBackActivity";
@@ -64,7 +63,8 @@ public class NBackActivity extends AppCompatActivity {
         elemBtn = findViewById(R.id.elementBtn);
         elemBtnClickCounter = 0;
 
-        fadeIn = AnimationUtils.loadAnimation(NBackActivity.this, R.anim.fade_in);
+        animationManager.addAnimation(R.anim.fade_in, "fade_in", NBackActivity.this);
+
         testListe = (ArrayList<String>) getIntent().getSerializableExtra("dataset");
 
 
@@ -106,8 +106,8 @@ public class NBackActivity extends AppCompatActivity {
                 TextView randomIndexTV = getViewAt(randomIntPos);
                 int randomIntElem = random.nextInt(testListe.size()); //zufällige Zahl von 0-length
                 Log.i(TAG, "es wird Element  " + testListe.get(randomIntElem) + " hereingesetzt");
-                //randomIndexTV.setText(testListe.get(randomIntElem));
-                setTextAndAnim(testListe.get(randomIntElem), randomIndexTV, fadeIn);
+                randomIndexTV.setText(testListe.get(randomIntElem));
+                animationManager.executeStoredAnimation("fade_in", randomIndexTV);
 
 
                 //lade Position und Inhalt in Speicher (als Tupel)
