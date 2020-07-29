@@ -179,9 +179,10 @@ public class Sequence extends AppCompatActivity {
         }
     }
 
-    protected void setTextAndAnim(String text, TextView v, Animation anim){
+    //TODO add exception if no animation could be found
+    protected void setTextAndAnim(String text, TextView v, String animationName){
         v.setText(text);
-        v.startAnimation(anim);
+        animationManager.executeStoredAnimation(animationName, v);
     }
 
     //sets right and left animation alternately and text to the TextView
