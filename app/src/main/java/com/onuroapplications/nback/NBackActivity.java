@@ -130,12 +130,6 @@ public class NBackActivity extends AppCompatActivity {
 
     }
 
-    //TODO see sequence class
-    protected void setTextAndAnim(String text, TextView v, Animation anim){
-        v.setText(text);
-        v.startAnimation(anim);
-    }
-
 
     private void initPosButton() {
         posBtn.setOnClickListener(new View.OnClickListener() {
