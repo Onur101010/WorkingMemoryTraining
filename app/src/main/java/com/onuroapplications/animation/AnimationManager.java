@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * This singleton class provides methods for animations. Animations can be stored and operations
  * can be executed on. A class using this manager can also start an animation.
- * All animations in the project are only loaded ones and are stored in this class.
+ * All animations in the project are only loaded once and are stored in this class.
  */
 public class AnimationManager {
     HashMap<String, Animation> animations = new HashMap<>();
