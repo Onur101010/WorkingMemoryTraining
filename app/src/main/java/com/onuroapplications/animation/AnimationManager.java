@@ -26,8 +26,10 @@ public class AnimationManager {
     }
 
     public void addAnimation(int id, String name, Context context){
-        Animation animation = AnimationUtils.loadAnimation(context, id);
-        animations.put(name, animation);
+        if(!animations.containsKey(name)) {
+            Animation animation = AnimationUtils.loadAnimation(context, id);
+            animations.put(name, animation);
+        }
     }
 
     //TODO add exception

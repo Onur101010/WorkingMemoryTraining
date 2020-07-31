@@ -100,8 +100,8 @@ public class Sequence extends AppCompatActivity {
         text = findViewById(R.id.textView);
         restartBtn = findViewById(R.id.restart);
 
-        animationManager.addAnimation(R.anim.slide_left, "slide_left", Sequence.this);
-        animationManager.addAnimation(R.anim.slide_right, "slide_right", Sequence.this);
+        animationManager.addAnimation(R.anim.slide_left, "slide_left", this.getApplicationContext());
+        animationManager.addAnimation(R.anim.slide_right, "slide_right", this.getApplicationContext());
 
         restartBtn.setVisibility(View.INVISIBLE);
         text.setVisibility(View.VISIBLE);
