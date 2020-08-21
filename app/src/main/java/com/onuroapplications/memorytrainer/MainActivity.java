@@ -22,6 +22,7 @@ import com.onuroapplications.sequenceBackwards.SequenceBackwards;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private DatabaseHelper db;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager linLayoutManager;
     private RecyclerView.Adapter mAdapter;
@@ -38,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
         addBtn = (Button) findViewById(R.id.addButton);
         editText = (EditText) findViewById(R.id.editText);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        //TODO only for testing
+        //create Database with DatabaseHelper
+        db = new DatabaseHelper(this);
+        if(db.getReadableDatabase() != null) {
+            System.out.println(db.getDatabaseName());
+        }
 
         //attach the ItemTouchHelper for swipe deletion
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(getItemTouchHelperCallback());
